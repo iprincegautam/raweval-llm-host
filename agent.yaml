@@ -1,0 +1,51 @@
+spec_version: "0.1.0"
+name: raweval-llm-host
+version: "1.0.0"
+description: >
+  Unified LLM client for RawEval — one call signature across OpenAI, Anthropic,
+  Google Gemini, Groq, and DeepSeek. Powers multi-model evaluation, chat, and
+  vision annotation pipelines.
+
+model:
+  preferred: "gpt-4o"
+  fallback:
+    - "claude-3-5-sonnet-20241022"
+    - "gemini-1.5-pro"
+    - "gpt-4o-mini"
+
+tools:
+  - read
+  - write
+  - cli
+
+capabilities:
+  - unified_llm_call
+  - parallel_multi_model
+  - vision_multimodal
+  - cost_tracking
+  - provider_routing
+
+runtime:
+  max_turns: 40
+  temperature_default: 0.7
+  max_tokens_default: 4096
+
+environment:
+  required:
+    - OPENAI_API_KEY
+  optional:
+    - ANTHROPIC_API_KEY
+    - GOOGLE_API_KEY
+    - GROQ_API_KEY
+    - DEEPSEEK_API_KEY
+
+repository:
+  package_root: packages/llm
+  examples_dir: examples
+  entrypoint: packages.llm.client.LLMClient
+
+metadata:
+  author: RawEval
+  license: MIT
+  production_url: https://chat.raweval.com
+  github: https://github.com/loxerxxxx/raweval-llm-host
